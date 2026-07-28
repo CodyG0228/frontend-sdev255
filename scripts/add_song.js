@@ -12,21 +12,27 @@ async function addSong(){
 
     }
     const token = localStorage.getItem("token")
+    if (!token) {
+        document.querySelector("#error").innerHTML = "You must be logged in to add a song."
+        return
+    }
     const response = await fetch("https://backend-8tnt.onrender.com/api/songs", {
-        headers: { "x-auth": token },
         method: "POST",
-        headers:{
-            "Content-Type" : "application/json"
+        headers: {
+            "Content-Type" : "application/json",
+            "x-auth": token
         },
         body: JSON.stringify(song)
     })
-
     if(response.ok){
         const results = await response.json()
         alert("Added song with ID of" + results._id)
         document.querySelector("form").reset()
     }
+    else if (response.status === 401) {
+        document.querySelector("#error").innerHTML = "Not authorized — please log in."
+    }
     else{
-        document.querySelector("#error").innerHTML = "Cannot add song"
+        document.querySelector("#error").innerHTML = "Cannot add song. Backend error?"
     }
 }
