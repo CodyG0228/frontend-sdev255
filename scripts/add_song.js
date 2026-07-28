@@ -11,7 +11,9 @@ async function addSong(){
         genre: document.querySelector("#genre").value ? document.querySelector("#genre").value.split(",") : []
 
     }
-    const response = await fetch("https://backend-8tnt.onrender.com/api/songs",{
+    const token = localStorage.getItem("token")
+    const response = await fetch("https://backend-8tnt.onrender.com/api/songs", {
+        headers: { "x-auth": token },
         method: "POST",
         headers:{
             "Content-Type" : "application/json"
@@ -22,8 +24,6 @@ async function addSong(){
     if(response.ok){
         const results = await response.json()
         alert("Added song with ID of" + results._id)
-
-        //reset the form after song is succesfully added
         document.querySelector("form").reset()
     }
     else{
