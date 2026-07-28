@@ -11,7 +11,7 @@ async function addSong(){
         genre: document.querySelector("#genre").value ? document.querySelector("#genre").value.split(",") : []
 
     }
-    const response = await fetch("http://localhost:3000/api/songs",{
+    const response = await fetch("https://backend-8tnt.onrender.com/api/songs",{
         method: "POST",
         headers:{
             "Content-Type" : "application/json"
