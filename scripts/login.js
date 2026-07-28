@@ -17,7 +17,7 @@ async function login() {
       localStorage.setItem("token", data.token)
       window.location.href = "index.html"
     } else {
-      document.querySelector("#error").textContent = "Username or Password incorrect. Spelling?"
+      document.querySelector("#error").textContent = "Username or password incorrect. Spelling?"
     }
   } catch (err) {
     document.querySelector("#error").textContent = "Error. Please try again."
