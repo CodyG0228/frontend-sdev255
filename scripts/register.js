@@ -3,11 +3,12 @@ addEventListener("DOMContentLoaded", () => {
 })
 
 async function registerUser() {
+  const statusElem = document.querySelector("#status");
   const payload = {
     username: document.querySelector("#username").value,
     password: document.querySelector("#password").value,
-    status: document.querySelector("#status").value || undefined
-  }
+    status: statusElem ? statusElem.value : undefined
+};
 
   try {
     const res = await fetch("https://backend-8tnt.onrender.com/api/register", {
